@@ -1,7 +1,9 @@
 /* ============================================================
-   styles/base.css
-   Variables globales, reset y tipografía base.
+   styles/base.css  — AVA Premium Edition v3 - Color Palette
+   Transformación total con nueva paleta de colores
    ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap');
 
 *,
 *::before,
@@ -12,55 +14,151 @@
 }
 
 :root {
-  --bg-app: #f4f7fb;
-  --bg-main: #ffffff;
-  --bg-sidebar: #f8fafc;
-  --bg-sidebar-elevated: #ffffff;
-  --bg-surface: #f8fafc;
-  --bg-assistant: #f9fafb;
-  --bg-user: #0f4c9c;
+  /* ── NUEVA PALETA DE COLORES PREMIUM ─────────────────────── */
+  --color-primary:     #e15e29;  /* Naranja Terracota - Acento */
+  --color-primary-dark:#c44d1d;  /* Naranja más oscuro */
+  --color-primary-light:#f07440; /* Naranja más claro */
+  
+  --color-secondary:   #008b8b;  /* Teal - Elementos secundarios */
+  --color-secondary-dark:#006b6b;
+  --color-secondary-light:#20a0a0;
+  
+  --color-accent:      #d1b742;  /* Dorado - Premium touches */
+  --color-accent-dark: #b89a2e;
+  --color-accent-light:#e2c96c;
+  
+  --color-white:       #ffffff;
+  --color-black:       #000000;
+  --color-deep-blue:   #2e5871;  /* Azul profundo - Estructura */
+  --color-deep-blue-dark:#1e3d4f;
+  --color-deep-blue-light:#407090;
 
-  --text-main: #0f172a;
-  --text-primary: var(--text-main);
-  --text-muted: #64748b;
-  --text-on-dark: #0f172a;
-  --text-sidebar: #1e293b;
-  --text-sidebar-active: #0f172a;
+  /* ── Fondos Estratégicos ─────────────────────────────────── */
+  --bg-app:             linear-gradient(135deg, #f5f7fa 0%, #e8edf2 100%);
+  --bg-main:            var(--color-white);
+  --bg-sidebar:         linear-gradient(180deg, var(--color-deep-blue) 0%, #1e3d4f 100%);
+  --bg-sidebar-elevated: rgba(46, 88, 113, 0.95);
+  --bg-surface:         #f8f9fc;
+  --bg-assistant:       rgba(255, 255, 255, 0.95);
+  --bg-user:            linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
 
-  --border-soft: #e2e8f0;
-  --sidebar-border: #e2e8f0;
-  --sidebar-btn-border: #d9e2ec;
-  --sidebar-btn-hover: #eef4fb;
-  --sidebar-btn-hover-border: #d1d5db;
-  --chat-item-hover: #eef4fb;
-  --chat-item-active: #e4ecf7;
+  /* ── Textos con Contraste Premium ────────────────────────── */
+  --text-main:          var(--color-black);
+  --text-primary:       var(--color-black);
+  --text-muted:         #4a5568;
+  --text-on-dark:       var(--color-white);
+  --text-sidebar:       rgba(255, 255, 255, 0.85);
+  --text-sidebar-active: var(--color-white);
+  --text-light:         var(--color-white);
 
-  --header-bg: rgba(255, 255, 255, 0.92);
-  --avatar-assistant: #e5e7eb;
-  --avatar-user: #dbeafe;
-  --message-border: #eceff3;
-  --input-border: #d9e2ec;
-  --disabled-btn: #cbd5e1;
-  --typing-dot: #9ca3af;
+  /* ── Bordes y Separadores ───────────────────────────────── */
+  --border-soft:           rgba(0, 0, 0, 0.08);
+  --sidebar-border:        rgba(255, 255, 255, 0.12);
+  --sidebar-btn-border:    rgba(255, 255, 255, 0.15);
+  --sidebar-btn-hover:     rgba(255, 255, 255, 0.1);
+  --sidebar-btn-hover-border: rgba(255, 255, 255, 0.25);
+  --chat-item-hover:       rgba(255, 255, 255, 0.08);
+  --chat-item-active:      rgba(209, 183, 66, 0.15);
 
-  --accent: #0f4c9c;
-  --accent-hover: #0b3e81;
+  /* ── Componentes Premium ────────────────────────────────── */
+  --header-bg:             rgba(255, 255, 255, 0.98);
+  --avatar-assistant:      linear-gradient(135deg, var(--color-secondary), var(--color-secondary-dark));
+  --avatar-user:           linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  --message-border:        rgba(0, 0, 0, 0.06);
+  --input-border:          rgba(0, 0, 0, 0.12);
+  --disabled-btn:          #cbd5e1;
+  --typing-dot:            var(--color-secondary);
+
+  /* ── Acentos y Glows ────────────────────────────────────── */
+  --accent:                var(--color-primary);
+  --accent-hover:          var(--color-primary-dark);
+  --accent-light:          rgba(225, 94, 41, 0.1);
+  --accent-glow:           rgba(225, 94, 41, 0.25);
+  
+  --secondary-glow:        rgba(0, 139, 139, 0.25);
+  --gold-glow:             rgba(209, 183, 66, 0.3);
+
+  /* ── Glassmorphism Premium con Nueva Paleta ──────────────── */
+  --glass-bg:              rgba(255, 255, 255, 0.85);
+  --glass-border:          rgba(255, 255, 255, 0.95);
+  --glass-shadow:          0 8px 32px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04);
+  --glass-shadow-md:       0 12px 40px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+  --glass-shadow-lg:       0 20px 60px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.08);
+
+  /* ── Sistema de Sombras Premium ─────────────────────────── */
+  --shadow-elevation-low: 0px 1px 2px rgba(0, 0, 0, 0.04), 0px 2px 4px rgba(0, 0, 0, 0.04);
+  --shadow-elevation-medium: 0px 2px 4px rgba(0, 0, 0, 0.06), 0px 4px 8px rgba(0, 0, 0, 0.06), 0px 8px 16px rgba(0, 0, 0, 0.04);
+  --shadow-elevation-high: 0px 4px 8px rgba(0, 0, 0, 0.08), 0px 12px 24px rgba(0, 0, 0, 0.08), 0px 24px 48px rgba(0, 0, 0, 0.04);
+
+  /* ── Radios Modernos ────────────────────────────────────── */
+  --radius-sm:   8px;
+  --radius-md:   12px;
+  --radius-lg:   18px;
+  --radius-xl:   24px;
+  --radius-2xl:  32px;
+  --radius-pill: 999px;
 }
 
-html,
-body {
+html, body {
   height: 100%;
   height: 100dvh;
 }
 
 body {
-  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   background: var(--bg-app);
   color: var(--text-main);
   display: flex;
   overflow: hidden;
+  position: relative;
+}
+
+/* Patrón de fondo sutil para textura premium */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-image: 
+    repeating-linear-gradient(45deg, rgba(0,0,0,0.02) 0px, rgba(0,0,0,0.02) 1px, transparent 1px, transparent 24px);
+  z-index: 0;
 }
 
 .hidden {
   display: none !important;
+}
+
+/* Scrollbar premium con colores de la paleta */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: var(--radius-pill);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-secondary);
+  border-radius: var(--radius-pill);
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-secondary-dark);
+}
+
+/* Selección de texto con color premium */
+::selection {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+::-moz-selection {
+  background: var(--color-primary);
+  color: var(--color-white);
 }

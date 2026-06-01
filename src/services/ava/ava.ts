@@ -23,7 +23,7 @@ const CATEGORY_NAMES: Record<string, string> = {
   capacitacion: 'Capacitación SGC en UNIMINUTO',
   consulta: 'Consulta Técnica ISO 9001:2015',
   simulador: 'Simulador de Auditorías',
-  gestion: 'Gestión de No Conformidades',
+  gestion: '📖 Glosario SGC - ISOLUCION',
 };
 
 const PROCESOS: Record<string, string[]> = {
@@ -47,20 +47,20 @@ function getWebhook(category: string | null): string {
 export function renderAvaWelcomeCards(): string {
   return `
     <button class="category-btn" data-ava-cat="capacitacion">
-      <span class="icon">🧠</span>
-      Capacitación SGC en UNIMINUTO
+      <span class="icon">🎓</span>
+      <span>Capacitación SGC en UNIMINUTO</span>
     </button>
     <button class="category-btn" data-ava-cat="consulta">
-        <span class="icon">📘</span>
-        Consulta Técnica ISO 9001:2015
-      </button>
+      <span class="icon">🔍</span>
+      <span>Consulta Técnica ISO 9001:2015</span>
+    </button>
     <button class="category-btn" data-ava-cat="simulador">
-      <span class="icon">💡</span>
-      Simulador de Auditorías
+      <span class="icon">🎮</span>
+      <span>Simulador de Auditorías</span>
     </button>
     <button class="category-btn" data-ava-cat="gestion">
-      <span class="icon">📊</span>
-      Glosario SGC - ISOLUCION
+      <span class="icon">📖</span>
+      <span>Glosario SGC - ISOLUCION</span>
     </button>
   `;
 }
@@ -88,15 +88,21 @@ export function avaSelectCategory(
   chat.serviceId = SERVICE_ID;
   chat.title = CATEGORY_NAMES[category] ?? 'AVA';
 
+  // Mensajes personalizados para cada categoría
   const welcomeMap: Record<string, string> = {
     capacitacion: `👋 ¡Hola! Bienvenida a "${CATEGORY_NAMES.capacitacion}".\n\nPara empezar, escribe: "empecemos".`,
-    consulta: `Bienvenido al modulo de consulta ISO 9001:2015, para comenzar el chat, puedes iniciar saludando a AVA. \n\n Por ejemplo, puedes escribir "Hola AVA" o "Buenos días".`,
-    default: `👋 Bienvenida al módulo "${CATEGORY_NAMES[category] ?? category}".Este módulo está diseñado para realizar una preauditoría de tus procesos, que consiste en una simulación de auditoría donde te hare una serie de preguntas relacionadas con el macroproceso que elijas. ¡Empecemos! Selecciona el macroproceso que deseas auditar.(No olvides que si quieres cambiar de categoria debes iniciar un nuevo chat.)`,
+    
+    consulta: `Bienvenido al módulo de consulta ISO 9001:2015, para comenzar el chat, puedes iniciar saludando a AVA. \n\n Por ejemplo, puedes escribir "Hola AVA" o "Buenos días".`,
+    
+    // 🔥 NUEVO MENSAJE PARA GLOSARIO - COMPLETAMENTE DIFERENTE
+    gestion: `📖 **¡Bienvenido al Glosario SGC - ISOLUCION!** 📖\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n✨ **Módulo Especial de Consulta Rápida** ✨\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nEste es un espacio dedicado a resolver tus dudas sobre términos del **Sistema de Gestión de Calidad**.\n\n🔍 **¿Cómo funciona?**\n• Escribe cualquier palabra o término que quieras consultar\n• Ejemplo: *"¿Qué es ISO 9001?"* o *"Define No Conformidad"*\n• También puedes preguntar: *"Qué significa PDCA"* o *"Qué es un proceso"*\n\n📚 **Recibirás:**\n• Una definición clara y sencilla\n• Ejemplos aplicados a UNIMINUTO\n• Referencias a la normativa ISO 9001:2015\n• Contexto práctico para tu trabajo diario\n\n💡 **Términos populares para consultar:**\n• Calidad • Proceso • Procedimiento • Indicador\n• No Conformidad • Acción Correctiva • Mejora Continua\n• Ciclo PHVA • Enfoque a procesos • Riesgo y Oportunidad\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n✨ **Escribe el término que deseas consultar** 👇\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`,
+    
+    simulador: `🎮 **Bienvenido al Simulador de Auditorías** 🎮\n\nEste módulo está diseñado para realizar una preauditoría de tus procesos, que consiste en una simulación de auditoría donde te haré una serie de preguntas relacionadas con el macroproceso que elijas.\n\n¡Empecemos! Selecciona el macroproceso que deseas auditar.\n\n(No olvides que si quieres cambiar de categoría debes iniciar un nuevo chat.)`,
   };
 
   chat.messages.push({
     role: 'assistant',
-    content: welcomeMap[category] ?? welcomeMap.default,
+    content: welcomeMap[category] ?? welcomeMap.simulador,
     timestamp: new Date().toISOString(),
   });
 
@@ -129,7 +135,10 @@ export function renderProcessSelection(): void {
     <div class="process-selection-title">📋 Selecciona el macroproceso:</div>
     <div class="process-buttons">
       ${Object.keys(PROCESOS).map((macro, i) => `
-        <button class="process-btn" data-macro-index="${i}">${macro}</button>
+        <button class="process-btn" data-macro-index="${i}">
+          <span class="process-icon">${getProcessIcon(macro)}</span>
+          <span class="process-title">${macro}</span>
+        </button>
       `).join('')}
     </div>`;
 
@@ -145,6 +154,17 @@ export function renderProcessSelection(): void {
   scrollToBottom();
 }
 
+function getProcessIcon(macro: string): string {
+  const icons: Record<string, string> = {
+    'Docencia': '📚',
+    'Investigación': '🔬',
+    'Proyección Social': '🤝',
+    'Gestión Administrativa y Financiera': '📊',
+    'Gestión de Mercadeo y Posicionamiento': '📢'
+  };
+  return icons[macro] || '📌';
+}
+
 function renderSubprocessSelection(macro: string): void {
   const div = document.getElementById('processSelectionDiv');
   if (!div) return;
@@ -155,8 +175,16 @@ function renderSubprocessSelection(macro: string): void {
   div.innerHTML = `
     <div class="process-selection-title">📋 Macroproceso: <strong>${macro}</strong><br>Selecciona el subproceso:</div>
     <div class="process-buttons">
-      ${subs.map((sub, i) => `<button class="process-btn" data-sub-index="${i}" data-macro-index="${macroIndex}">${sub}</button>`).join('')}
-      <button class="process-btn process-btn-secondary" id="backToMacro">← Cambiar macroproceso</button>
+      ${subs.map((sub, i) => `
+        <button class="process-btn" data-sub-index="${i}" data-macro-index="${macroIndex}">
+          <span class="process-icon">📌</span>
+          <span class="process-title">${sub}</span>
+        </button>
+      `).join('')}
+      <button class="process-btn process-btn-secondary" id="backToMacro">
+        <span class="process-icon">←</span>
+        <span class="process-title">Cambiar macroproceso</span>
+      </button>
     </div>`;
 
   div.querySelectorAll<HTMLButtonElement>('[data-sub-index]').forEach(btn => {
