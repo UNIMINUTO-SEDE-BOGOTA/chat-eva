@@ -75,7 +75,6 @@ export async function postToWebhook(
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error('❌ Respuesta no OK:', response.status, errorText);
       throw new Error(`HTTP ${response.status}`);
     }
 
